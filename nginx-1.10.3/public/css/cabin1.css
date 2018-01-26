@@ -1,0 +1,22 @@
+#cabin1Container {
+  height: 100%;
+  width: 85%;
+  margin: auto;
+  -moz-border-radius: 25px;
+  -webkit-border-radius: 25px;
+  border-radius: 25px;
+  color: white;
+  font-weight: bold;
+  margin-top: 10px; }
+
+.form-control {
+  width: 13%; }
+
+input.ng-invalid.ng-touched {
+  border: 2px solid aqua; }
+
+.message {
+  color: aqua;
+  font-size: 1.4em;
+  font-weight: bold;
+  display: block; }

@@ -1,0 +1,45 @@
+
+<div id="cabin1Container">
+
+    <form name="bookingForm" novalidate>
+        <div class="form-group">
+            <label class="lead">First Name</label>
+            <input type="text" class="form-control" placeholder="First Name" name="firstName" ng-required="true" ng-model="name.firstName">
+            <div class="message" ng-show="bookingForm.firstName.$touched && bookingForm.firstName.$invalid">First Name is Required</div>
+        </div>
+
+        <div class="form-group">
+            <label class="lead">Last Name</label>
+            <input type="text" class="form-control" placeholder="Last Name" name="lastName" ng-required="true" ng-model="name.lastName">
+            <div class="message" ng-show="bookingForm.lastName.$touched && bookingForm.lastName.$invalid" class="message">Last Name is Required</div>
+        </div>
+
+        <div ng-controller="DatepickerCtrl">
+            <div class="row">
+                <div class="col-md-6">
+                    <p class="input-group">
+                        <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" is-open="popup1.opened" show-button-bar="false" placeholder="Enter Start Date" name="startDate"/>
+                        <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                  </span>
+                    </p>
+                    <div class="message" ng-show="bookingForm.startDate.$touched && bookingForm.startDate.$pristine" class="message">Start Date Required</div>
+                </div>
+
+                <div class="col-md-6">
+                    <p class="input-group">
+                        <input type="text" class="form-control" uib-datepicker-popup ng-model="dt" is-open="popup2.opened"  show-button-bar="false" min-date="minDate" placeholder="Enter End Date" name="endDate" id="endDate"/>
+                        <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                  </span>
+                    </p>
+                    <div class="message" ng-show="bookingForm.endDate.$touched && bookingForm.endDate.$pristine" class="message">End Date Required</div>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+
+    </form>
+
+</div>
