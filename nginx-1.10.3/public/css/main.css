@@ -16,35 +16,30 @@ header {
   height: 80%;
   margin-top: 15px; }
 
-.cabin {
-  height: 10em;
-  width: 13em; }
+#homeContainer {
+  width: 85%;
+  height: 90%;
+  margin: auto;
+  margin-top: 3%; }
 
-ul li {
-  list-style-type: none;
-  display: inline-block; }
-
-#navContainer {
-  color: white;
-  width: 100%;
+.datesTaken {
   height: 100%;
-  position: relative; }
-
-nav {
-  position: absolute;
-  width: 100%;
-  bottom: 0;
+  width: 32%;
+  margin: 4px;
+  display: inline-block;
+  background-color: rgba(255, 255, 255, 0.4);
+  position: relative;
+  left: 12px;
+  vertical-align: top;
+  font-weight: bold;
+  font-size: 2em;
   text-align: center; }
 
-#homeContainer {
-  height: 100%;
-  width: 85%;
-  background: rgba(245, 245, 220, 0.3);
-  margin: auto;
-  -moz-border-radius: 25px;
-  -webkit-border-radius: 25px;
-  border-radius: 25px;
-  -khtml-border-radius: 25px; }
+.buttonContainer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  margin-bottom: 2%; }
 
 #cabin1Container {
   height: 100%;

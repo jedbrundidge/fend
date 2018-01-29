@@ -7,12 +7,12 @@ var sass = require("gulp-sass");
 
 
 gulp.task('styles', function() {
-    gulp.src('scss/**/*.scss')
+    gulp.src('nginx-1.10.3/public/scss/**/*.scss')
         .pipe(sass().on('error', sass.logError))
-        .pipe(gulp.dest('./css/'))
+        .pipe(gulp.dest('nginx-1.10.3/public/css/'))
 });
 
 //Watch task
 gulp.task('default',function() {
-    gulp.watch('scss/**/*.scss',['styles']);
+    gulp.watch('nginx-1.10.3/public/scss/**/*.scss',['styles']);
 });

@@ -1,35 +1,60 @@
 
-<div id="homeContainer" class="animated slideInRight">
-    <div id="navContainer">
-        <nav>
-            <ul id="cabinList">
+<div id="homeContainer" class="animated flipInX">
 
-                <li>
-                    <a href="cabin1">
-                        <img src="images/black-white-cabin.svg" id="cabin 1" class="cabin">
-                    </a>
+    <div id="cabin1Get" class="datesTaken" ng-controller="cabinOneResCtrl">
+        <p>Cabin One Reservations</p>
 
-                    <h4>Cabin One</h4>
-                </li>
+        <div ng-repeat="reserve in res">
+            {{reserve.firstName}}
+            {{reserve.lastName}}
+            {{reserve.dateIn | date}}
+            {{reserve.dateOut | date}}
+        </div>
 
-                <li>
-                    <a href="cabin2">
-                        <img src="images/black-white-cabin.svg" id="cabin 2" class="cabin">
-                    </a>
+        <div class="buttonContainer">
+            <a href="cabin1"><button type="button" class="btn btn-primary">Reserve Now</button></a>
+        </div>
 
-                    <h4>Cabin Two</h4>
-                </li>
-
-                <li>
-                    <a href="cabin3">
-                        <img src="images/black-white-cabin.svg" id="cabin 3" class="cabin">
-                    </a>
-
-                    <h4>Cabin Three</h4>
-                </li>
-            </ul>
-        </nav>
     </div>
+
+    <div id="cabin2Get" class="datesTaken" ng-controller="cabinTwoResCtrl">
+        <p>Cabin Two Reservations</p>
+
+        <div ng-repeat="reserve in res">
+
+            {{reserve.firstName}}
+            {{reserve.lastName}}
+            {{reserve.dateIn | date}}
+            {{reserve.dateOut | date}}
+
+        </div>
+
+
+        <div class="buttonContainer">
+            <a href="cabin2"><button type="button" class="btn btn-primary">Reserve Now</button></a>
+        </div>
+
+    </div>
+
+    <div id="cabin3Get" class="datesTaken" ng-controller="cabinThreeResCtrl">
+        <p>Cabin Three Reservations</p>
+
+        <div ng-repeat="reserve in res">
+
+            {{reserve.firstName}}
+            {{reserve.lastName}}
+            {{reserve.dateIn | date}}
+            {{reserve.dateOut | date}}
+
+        </div>
+
+        <div class="buttonContainer">
+            <a href="cabin3"><button type="button" class="btn btn-primary">Reserve Now</button></a>
+        </div>
+
+    </div>
+
 </div>
+
 
 

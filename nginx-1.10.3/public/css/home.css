@@ -1,9 +1,24 @@
 #homeContainer {
-  height: 100%;
   width: 85%;
-  background: rgba(245, 245, 220, 0.3);
+  height: 90%;
   margin: auto;
-  -moz-border-radius: 25px;
-  -webkit-border-radius: 25px;
-  border-radius: 25px;
-  -khtml-border-radius: 25px; }
+  margin-top: 3%; }
+
+.datesTaken {
+  height: 100%;
+  width: 32%;
+  margin: 4px;
+  display: inline-block;
+  background-color: rgba(255, 255, 255, 0.4);
+  position: relative;
+  left: 12px;
+  vertical-align: top;
+  font-weight: bold;
+  font-size: 2em;
+  text-align: center; }
+
+.buttonContainer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  margin-bottom: 2%; }
