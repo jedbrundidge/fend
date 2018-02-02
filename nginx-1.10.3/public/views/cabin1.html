@@ -1,7 +1,13 @@
+<div id="cabin1Container"  ng-controller="addReservationOne">
 
-<div id="cabin1Container">
+    <div growl></div>
 
     <form name="bookingForm"  novalidate>
+
+        <div>
+            <input id="cabin1" ng-model="reservation.cabinNum" type="hidden">
+        </div>
+
         <div class="form-group">
             <label class="lead">First Name</label>
             <input type="text" class="form-control" placeholder="First Name" name="firstName" ng-required="true" ng-model="reservation.firstName">
@@ -18,28 +24,37 @@
             <div class="row">
                 <div class="col-md-6">
                     <p class="input-group">
-                        <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" ng-change="reservation.dateIn" is-open="popup1.opened" show-button-bar="false" placeholder="Enter Start Date" name="startDate"/>
+                        <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="reservation.dateIn"  is-open="popup1.opened" show-button-bar="false" placeholder="Enter Start Date" name="startDate" ng-required="true"/>
                         <span class="input-group-btn">
                     <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
                   </span>
                     </p>
-                    <div class="message" ng-show="bookingForm.startDate.$touched && bookingForm.startDate.$pristine" class="message">Start Date Required</div>
+                    <div class="message" ng-show="bookingForm.startDate.$touched && bookingForm.startDate.$invalid" class="message">Start Date Required</div>
                 </div>
 
                 <div class="col-md-6">
                     <p class="input-group">
-                        <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="dt" ng-change="reservation.dateOut" is-open="popup2.opened"  show-button-bar="false" min-date="minDate" placeholder="Enter End Date" name="endDate" id="endDate"/>
+                        <input type="text" class="form-control" uib-datepicker-popup="{{format}}" ng-model="reservation.dateOut" is-open="popup2.opened"  show-button-bar="false" min-date="minDate" placeholder="Enter End Date" name="endDate" id="endDate" ng-required="true"/>
                         <span class="input-group-btn">
-                    <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
-                  </span>
+                        <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                        </span>
                     </p>
-                    <div class="message" ng-show="bookingForm.endDate.$touched && bookingForm.endDate.$pristine" class="message">End Date Required</div>
+                    <div class="message" ng-show="bookingForm.endDate.$touched && bookingForm.endDate.$invalid" class="message">End Date Required</div>
                 </div>
             </div>
         </div>
 
-            <button type="submit" class="btn btn-primary" ng-controller="addReservationOne" ng-click="newReservation()">Submit</button>
+        <button type="submit" class="btn btn-primary" ng-click="newReservation()" ng-disabled="bookingForm.$invalid">Submit Reservation</button>
 
     </form>
 
+    <div>
+        <button class="btn btn-primary" type="button" ng-click="openModal()">Check Average Temps</button>
+    </div>
+
 </div>
+
+
+
+
+
