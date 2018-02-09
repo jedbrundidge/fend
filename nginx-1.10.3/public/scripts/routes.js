@@ -2,6 +2,8 @@
  * Created by JedBr on 1/22/2018.
  */
 
+
+
 var app = angular.module('myApp', ['ngRoute', 'ui.bootstrap', 'ngAnimate', 'ngResource', 'angular-growl']);
 
 angular.module('myApp').controller('DatepickerCtrl', function ($scope) {
@@ -59,25 +61,24 @@ app.config(function ($routeProvider, $locationProvider) {
 //Route services
 
 app.factory('getReservationsOne', function ($resource) {
-    return $resource("http://localhost:5016/api/booking/cabinOne")
+    return $resource("http://localhost:5017/api/booking/cabinOne")
 });
 
 app.factory('getReservationsTwo', function ($resource) {
-    return $resource("http://localhost:5016/api/booking/cabinTwo")
+    return $resource("http://localhost:5017/api/booking/cabinTwo")
 });
 
 app.factory('getReservationsThree', function ($resource) {
-    return $resource("http://localhost:5016/api/booking/cabinThree")
+    return $resource("http://localhost:5017/api/booking/cabinThree")
 });
 
 app.factory('postReservationOne', function ($resource) {
-    return $resource('http://localhost:5016/api/booking/addReservation')
+    return $resource('http://localhost:5017/api/booking/addReservation')
 });
 
-app.factory('getWeather', function ($resource) {
-    return $resource('http://localhost:5016/api/weather')
-});
+app.factory('getWeather', ['$rootScope', function($rootScope){
 
+}]);
 
 
 
@@ -95,23 +96,28 @@ app.controller('cabinThreeResCtrl', function ($scope, getReservationsThree) {
 });
 
 app.controller('weatherCtrl', function ($scope, getWeather) {
+
     $scope.weather = getWeather.query();
+
+    var startDate = document.getElementById("startDate").value;
+    var endDate = document.getElementById("endDate").value;
+
+
 });
 
-app.controller('addReservationOne', function ($scope, postReservationOne, $uibModal, growl, getWeather) {
-
+app.controller('addReservationOne', function ($scope, postReservationOne, $uibModal, growl) {
 
     $scope.reservation = {};
     $scope.newReservation = function () {
         var reservationOne = new postReservationOne($scope.reservation);
         reservationOne.$save();
 
-        growl.success('Your reservation has been submitted.',{title: 'Success!'});
+        growl.success('Your reservation has been submitted.', {title: 'Success!'});
 
     };
 
     $scope.showError = function(){
-        growl.error('Requested dates are not available.',{title: 'Error!'});
+        growl.error('Requested dates are not available.', {title: 'Error!'});
     };
 
     $scope.cabin1 = angular.element(document.querySelector('#cabin1'));
@@ -129,8 +135,6 @@ app.controller('addReservationOne', function ($scope, postReservationOne, $uibMo
         $scope.reservation.cabinNum = 3;
     }
 
-    $scope.weather = getWeather.query();
-
 
 
     $scope.openModal = function () {
@@ -142,10 +146,23 @@ app.controller('addReservationOne', function ($scope, postReservationOne, $uibMo
                };
            }
        })
+
     };
 
 });
 
 
+app.filter('ascendingSort', function () {
+    return function (input) {
+        return input.sort();
+    };
+});
 
+app.filter('relativedate', ['$filter', function ($filter) {
+    return function (rel, format) {
+        var date = new Date();
+        date.setDate(date.getDate() + rel);
+        return $filter('date')(date, format || 'MMMM-dd')
+    };
+}]);
 
