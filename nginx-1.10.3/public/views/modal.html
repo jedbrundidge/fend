@@ -5,7 +5,7 @@
     </div>
 
     <div class="modal-body" ng-controller="weatherCtrl">
-        <div ng-init="weather = (day | ascendingSort)" ng-repeat="weat in weather | myfilter">
+        <div ng-init="weather = (day | ascendingSort)" ng-repeat="weat in weather | dateRange">
             {{weat.averageTemp}}
             {{weat.skyCondition}}
             {{weat.chanceOfPrecip}}

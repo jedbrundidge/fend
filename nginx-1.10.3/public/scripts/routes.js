@@ -61,24 +61,24 @@ app.config(function ($routeProvider, $locationProvider) {
 //Route services
 
 app.factory('getReservationsOne', function ($resource) {
-    return $resource("http://localhost:5017/api/booking/cabinOne")
+    return $resource("http://localhost:5018/api/booking/cabinOne")
 });
 
 app.factory('getReservationsTwo', function ($resource) {
-    return $resource("http://localhost:5017/api/booking/cabinTwo")
+    return $resource("http://localhost:5018/api/booking/cabinTwo")
 });
 
 app.factory('getReservationsThree', function ($resource) {
-    return $resource("http://localhost:5017/api/booking/cabinThree")
+    return $resource("http://localhost:5018/api/booking/cabinThree")
 });
 
 app.factory('postReservationOne', function ($resource) {
-    return $resource('http://localhost:5017/api/booking/addReservation')
+    return $resource('http://localhost:5018/api/booking/addReservation')
 });
 
-app.factory('getWeather', ['$rootScope', function($rootScope){
-
-}]);
+app.factory('getWeather',  function($resource){
+    return $resource('http://localhost:5018/api/weather/averageTemps')
+});
 
 
 
@@ -101,6 +101,31 @@ app.controller('weatherCtrl', function ($scope, getWeather) {
 
     var startDate = document.getElementById("startDate").value;
     var endDate = document.getElementById("endDate").value;
+
+    /*
+    
+    $scope.dateFilter = function (property, startDate, endDate) {
+
+
+
+
+        return function (item) {
+
+            if(item[property] === null) return false;
+
+            var itemDate = moment(item[property]);
+            var s = moment(document.getElementById("startDate").value, "MMMM-dd");
+            var e = moment( document.getElementById("endDate").value, "MMMM-dd");
+
+            if(itemDate >= s && itemDate <= e) return true;
+            console.log(s);
+            console.log(e);
+            return false;
+
+        };
+
+    };
+    */
 
 
 });
@@ -166,3 +191,25 @@ app.filter('relativedate', ['$filter', function ($filter) {
     };
 }]);
 
+app.filter('dateRange', function() {
+    return function( items) {
+        var filtered = [];
+
+        var toDate = document.getElementById("startDate").value;
+        var fromDate = document.getElementById("startDate").value;
+
+
+        var from_date = Date.parse(fromDate);
+        var to_date = Date.parse(toDate);
+
+        console.log(from_date);
+        console.log(to_date);
+
+        angular.forEach(items, function(item) {
+            if(item.completed_date > from_date && item.completed_date < to_date) {
+                filtered.push(item);
+            }
+        });
+        return filtered;
+    };
+});
