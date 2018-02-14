@@ -210,3 +210,4 @@
 2018/02/07 22:38:38 [error] 6496#6996: *521 CreateFile() "C:\fend\nginx-1.10.3/\public/cabin1" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /cabin1 HTTP/1.1", host: "localhost:5018"
 2018/02/11 19:02:10 [emerg] 7332#9056: CreateDirectory() "C:\fend\nginx-1.10.3/temp/client_body_temp" failed (3: The system cannot find the path specified)
 2018/02/11 19:02:29 [emerg] 1740#10836: CreateDirectory() "C:\fend\nginx-1.10.3/temp/client_body_temp" failed (3: The system cannot find the path specified)
+2018/02/11 20:27:25 [error] 13328#1584: *1 CreateFile() "C:\fend\nginx-1.10.3/\public/favicon.ico" failed (2: The system cannot find the file specified), client: 127.0.0.1, server: localhost, request: "GET /favicon.ico HTTP/1.1", host: "localhost:5018"

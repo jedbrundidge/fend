@@ -97,10 +97,14 @@ app.controller('cabinThreeResCtrl', function ($scope, getReservationsThree) {
 
 app.controller('weatherCtrl', function ($scope, getWeather) {
 
-    $scope.weather = getWeather.query();
+   $scope.weather = getWeather.query();
+
+
 
     var startDate = document.getElementById("startDate").value;
     var endDate = document.getElementById("endDate").value;
+
+    //$scope.weather = weather;
 
     /*
     
@@ -126,18 +130,48 @@ app.controller('weatherCtrl', function ($scope, getWeather) {
 
     };
     */
+   $scope.dateRange2 = function (item) {
+        var date = new Date();
+
+        var startParts = startDate.split('-');
+        var endParts = endDate.split('-');
+        var start = new Date(startParts[2], getMonth(startParts[0]), startParts[1]);
+        var end = new Date(endParts[2], getMonth(endParts[0]), endParts[1]);
+
+
+        var itemDate = date.setDate(date.getDate() + item.day);
+
+        var meet = itemDate >= start.getTime() && itemDate <= end.getTime();
+
+        return meet;
+    };
+
+    var getMonth = function (month) {
+        var months = ["jan", "feb", "mar", "apr", "may", "jun", "jul", "aug", "sep", "oct", "nov", "dec"];
+        return months.indexOf(month.substring(0, 3).toLowerCase());
+    };
+
 
 
 });
+
+
 
 app.controller('addReservationOne', function ($scope, postReservationOne, $uibModal, growl) {
 
     $scope.reservation = {};
     $scope.newReservation = function () {
         var reservationOne = new postReservationOne($scope.reservation);
-        reservationOne.$save();
 
-        growl.success('Your reservation has been submitted.', {title: 'Success!'});
+        debugger;
+       var request  =  reservationOne.$save();
+        request.then(function (resp) {
+                /// on success
+            growl.success('Your reservation has been submitted.', {title: 'Success!'});
+        }).catch(function (error) {
+            growl.error('Requested dates are not available.', {title: 'Error!'});
+        });
+
 
     };
 
@@ -145,22 +179,22 @@ app.controller('addReservationOne', function ($scope, postReservationOne, $uibMo
         growl.error('Requested dates are not available.', {title: 'Error!'});
     };
 
-    $scope.cabin1 = angular.element(document.querySelector('#cabin1'));
-    $scope.cabin2 = angular.element(document.querySelector('#cabin2'));
-    $scope.cabin3 = angular.element(document.querySelector('#cabin3'));
+    $scope.init = function () {
+        $scope.cabin1 = document.querySelector('#cabin1');
+        $scope.cabin2 = document.querySelector('#cabin2');
+        $scope.cabin3 = document.querySelector('#cabin3');
 
 
-    if($scope.cabin1){
-        $scope.reservation.cabinNum = 1;
+        if($scope.cabin1){
+            $scope.reservation.cabinNum = 1;
 
-    }else if($scope.cabin2){
-        $scope.reservation.cabinNum = 2;
+        }else if($scope.cabin2){
+            $scope.reservation.cabinNum = 2;
 
-    }else if($scope.cabin3){
-        $scope.reservation.cabinNum = 3;
+        }else if($scope.cabin3){
+            $scope.reservation.cabinNum = 3;
+        }
     }
-
-
 
     $scope.openModal = function () {
        $uibModal.open({
@@ -169,11 +203,12 @@ app.controller('addReservationOne', function ($scope, postReservationOne, $uibMo
                $scope.ok = function () {
                    $uibModalInstance.close();
                };
+
            }
        })
 
     };
-
+    $scope.init()
 });
 
 
@@ -188,12 +223,14 @@ app.filter('relativedate', ['$filter', function ($filter) {
         var date = new Date();
         date.setDate(date.getDate() + rel);
         return $filter('date')(date, format || 'MMMM-dd')
-    };
+    }
 }]);
 
 app.filter('dateRange', function() {
     return function( items) {
         var filtered = [];
+
+        debugger;
 
         var toDate = document.getElementById("startDate").value;
         var fromDate = document.getElementById("startDate").value;
@@ -213,3 +250,9 @@ app.filter('dateRange', function() {
         return filtered;
     };
 });
+
+function relativeDate(rel, format) {
+    var date = new Date();
+    date.setDate(date.getDate() + rel);
+    return $filter('date')(date, format || 'MMMM-dd')
+}
